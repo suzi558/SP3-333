@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Netflix{
+main
+setup()
+-static ArrayList<User> users
+-static ArrayList<Media> ...
+}
+class User{
+- username
+- password
+- age
++ ArrayList<Media> watchedMovie
++ ArrayList<Media> savedMovie
++ void watchedMovie()
++ void savedMovie()
+ }
+
+abstract class Media{
+-String titel
+-double rating
+-int releaseDate
+ +ArrayList Categories
+ +Media(Titel, releaseDate, Categories, Rating)
+ + void play()
+ +getName()
+ +getRating()
+ +getRealseYear()
+ +getCategory()
+
+}
+class Film{
++Film(titel, releaseDate, Categories, rating)
+}
+class Series {
++ ArrayList<int>
+-int season
+-int episode
++Series(titel, releaseDate, Categories, Rating, season)
+}
+class Season extends Series{
+-int seasonNumber;
+-private ArrayList<String> episodes
++season(int seasonNumber)
+-getSeasonNumber()
++addEpisodes(String episodeTitle)
++toString()
+}
+
+
+package "util"{
+class TextUI{
+-Scanner scan
++ int promptNumeric(String msg)
++ String promptText(String msg)
++ int promptChoice(String msg, ArrayList<String> list)
++ boolean promptBinary(String msg )
+}
+class FileIO{
+FileReader()
++List<Media> readUserData(String path)
++void saveData(List<User> users,String path)
++String[] readBoardData(String path, int length)
+    }
+}
+
+Netflix *-- User
+Netflix *-- Media
+Media <|-- Film
+Media <|-- Series
+Series <|-- Season
+Season <|-- Episode
+Netflix *-- FileIO
+Netflix *-- TextUI
+@enduml
