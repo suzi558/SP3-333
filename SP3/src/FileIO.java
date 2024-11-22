@@ -9,7 +9,7 @@ public class FileIO {
 
     ArrayList<Media> series = new ArrayList<>(); //A list to store Media objects representing TV series
 
-    public static ArrayList<media> readData() {
+    public static ArrayList<Media> readMovieData() {
         try {
             Scanner scan = new Scanner(new File("film.txt"));
             while (scan.hasNextLine()) {          //Reads each line in
@@ -37,4 +37,35 @@ public class FileIO {
         return movies;
     }
 
-}
+    public static ArrayList<Media> readSeries() {
+        Scanner scan = new Scanner(new File("serier.txt"));
+        try {
+            while(scan.hasNextLine()){
+                String line = scan.nextLine();
+                String[] lineData = line.split(";");
+
+                String seriesName = lineData[0].trim();
+                String seriesYears = lineData[1].trim();
+
+                ArrayList<String> seriesCategories = new ArrayList<>();
+                String[] seriesCategory = lineData[2].split(",");
+                for(String category: seriesCategory){
+                    seriesCategories.add(category.trim());
+                }
+                double seriesRating = Double.parseDouble(lineData[3].trim().replace(',', '.'));
+
+                ArrayList<String> episodesPerSeason = new ArrayList<>();
+                String[] seasonsData = lineData[4].split(",");
+                for (String season : seasonsData) {
+                    episodesPerSeason.add(season.trim());
+                }
+                Series series = new Series(seriesName, seriesYears, seriesRating, episodesPerSeason);
+                series.add(series); // Populate the existing list
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+
+        } return series;
+            }
+
+        }
