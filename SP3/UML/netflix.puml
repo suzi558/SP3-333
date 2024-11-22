@@ -4,6 +4,8 @@
 class Netflix{
 main
 setup()
++ArrayList<Movies> Movies
++ArrayList<Series> Series
 -static ArrayList<User> users
 -static ArrayList<Media> ...
 }
@@ -26,7 +28,7 @@ abstract class Media{
  + void play()
  +getName()
  +getRating()
- +getRealseYear()
+ +getReleaseYear()
  +getCategory()
 
 }
@@ -34,15 +36,14 @@ class Film{
 +Film(titel, releaseDate, Categories, rating)
 }
 class Series {
-+ ArrayList<int>
 -int season
 -int episode
-+Series(titel, releaseDate, Categories, Rating, season)
++Series(titel, releaseDate, Categories, Rating, season, episode)
 }
 class Season extends Series{
 -int seasonNumber;
--private ArrayList<String> episodes
-+season(int seasonNumber)
+-private ArrayList<int> episodes
++season(int seasonNumber, ArrayList<int> episodes)
 -getSeasonNumber()
 +addEpisodes(String episodeTitle)
 +toString()

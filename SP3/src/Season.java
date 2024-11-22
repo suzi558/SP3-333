@@ -1,13 +1,17 @@
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 
 public class Season extends Series{
 
-    private int seasonNumber;
-    private ArrayList<String> list;
 
-    public int season(int seasonNumber){
-        return 1;
+
+    private int seasonNumber;
+    private ArrayList<Integer> episodeList;
+
+    Season(int seasonNumber, ArrayList<Integer> episodeList){
+        super(season, episode);
     }
+
+
 
     public int getSeasonNumber() {
         return seasonNumber;
@@ -19,4 +23,4 @@ public class Season extends Series{
     public String toString(){
         return "";
     }
-}
+} */
