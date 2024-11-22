@@ -7,11 +7,10 @@ public class FileIO {
 
     ArrayList<Media> movies = new ArrayList<>(); //A list to store Media objects representing movies.
 
-    ArrayList<Media> series = new ArrayList<>(); //A list to store Media objects representing TV series
+    ArrayList<Media> seriesList = new ArrayList<>(); //A list to store Media objects representing TV series
 
     public static ArrayList<Media> readMovieData() {
-        try {
-            Scanner scan = new Scanner(new File("film.txt"));
+        try (Scanner scan = new Scanner(new File("film.txt"))){
             while (scan.hasNextLine()) {          //Reads each line in
                 String line = scan.nextLine();  // the file until the end.
                 String[] lineData = line.split(";"); //Splits each line into an array of strings based on the semicolon.
@@ -19,14 +18,14 @@ public class FileIO {
                 String movieName = lineData[0].trim(); //Movie name: lineData[0] (e.g., "The Godfather").
                 String movieYear = lineData[1].trim(); //Release year: lineData[1] (e.g., "1972").
 
-                ArrayList<String> MovieCategory = new ArrayList<>();
+                ArrayList<String> movieCategories = new ArrayList<>();
                 String[] categoryArray = lineData[2].split(","); //Splits lineData[2] into individual categories
-                for (int i = 0; i < categoryArray.length; i++) {
-                    MovieCategory.add(categoryArray[i]); // Adds each category (except the last) to MovieCategory
+                for (String category : categoryArray) {
+                    movieCategories.add(category.trim());
                 }
-                String number = lineData[3].trim();
-                number = number.replace(',', '.'); //replaces , with ., and converts it to a double
-                double movieRating = Double.parseDouble(number);
+                String number = lineData[3].trim();  // Extract rating as a string
+                number = number.replace(',', '.'); // Replace ',' with '.' for proper parsing
+                double movieRating = Double.parseDouble(number); // Convert string to double
 
                 Movies movie = new Movies(movieName, movieYear, movieRating); //Constructs a Movies object using the name, year, and rating.
                 movies.add(movie); //Adds the Movies object to the movies list.
@@ -38,8 +37,7 @@ public class FileIO {
     }
 
     public static ArrayList<Media> readSeries() {
-        Scanner scan = new Scanner(new File("serier.txt"));
-        try {
+        try( Scanner scan = new Scanner(new File("serier.txt"));) {
             while(scan.hasNextLine()){
                 String line = scan.nextLine();
                 String[] lineData = line.split(";");
@@ -65,7 +63,7 @@ public class FileIO {
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
 
-        } return series;
+        } return seriesList;
             }
 
         }
