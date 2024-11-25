@@ -58,7 +58,7 @@ public class TextUI {
         System.out.println("Please create a password");
         String password = scan.nextLine();
 
-        if(userHandler.createUser(fullname, username, password)){
+        if(userHandler.createUser(username, password, fullname)){
             userHandler.saveUsers();
             System.out.println("Welcome to Chills  " + username);
             System.out.println("\n\n");

@@ -64,7 +64,7 @@ public class UserHandler {
     public void saveUsers(){
         try(FileWriter writer = new FileWriter(file)){ //Opens the file for writing using a FileWriter.
             for (User users : users){ //Iterates over the users list and writes each user's data to the file
-                writer.write(users.getFullName() +"," +users.getUsername() +","+ users.getPassword()+ "\n");
+                writer.write(users.getUsername() +","+ users.getPassword()+ "," + users.getFullName() + "\n");
                 //Each user is saved in the format: fullName,username,password.
             }
         } catch (IOException e) {
