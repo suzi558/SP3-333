@@ -4,18 +4,13 @@ public abstract class Media {
     String titel;
     double rating;
     int releaseDate;
-    ArrayList<Media> categories;
+    ArrayList<String> categories;
 
-    Media(String titel, int releaseDate, ArrayList<Media> categories, double rating) {
+    Media(String titel, int releaseDate, ArrayList<String> categories, double rating) {
         this.titel = titel;
         this.releaseDate = releaseDate;
         this.categories = categories;
         this.rating = rating;
-
-    }
-
-    void play() {
-        // ui.displayMsg(ui.getCurrentMovie+"is playing now...")
     }
 
     String getTitel(){
@@ -30,9 +25,8 @@ public abstract class Media {
         return this.releaseDate;
     }
 
-    ArrayList<Media> getCategory(){
+    ArrayList<String> getCategory(){
         return this.categories;
     }
-
 
 }
