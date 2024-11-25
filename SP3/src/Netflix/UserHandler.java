@@ -40,7 +40,7 @@ public class UserHandler {
     }
 
     public boolean ValidPassword(String password) {
-        if(password == null || password.length() <= 5 || password.length() >20){
+        if(password == null){
             System.out.println("the password is not meeting conditons ");
             return false;
         }
@@ -66,8 +66,6 @@ public class UserHandler {
             for (User users : users){ //Iterates over the users list and writes each user's data to the file
                 writer.write(users.getFullName() +"," +users.getUsername() +","+ users.getPassword()+ "\n");
                 //Each user is saved in the format: fullName,username,password.
-
-                writer.close();
             }
         } catch (IOException e) {
             System.out.println("system is not working currently ");

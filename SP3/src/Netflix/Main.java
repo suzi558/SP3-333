@@ -1,7 +1,7 @@
 package Netflix;
 public class Main {
     public static void main(String[] args) {
-        UserHandler userHandler = new UserHandler("data/UserLogin.csv");
+        UserHandler userHandler = new UserHandler("SP3/data/UserLogin.csv");
         TextUI textUI = new TextUI(userHandler);
         userHandler.loadUsers();
         String userinput = textUI.getUserInput();
