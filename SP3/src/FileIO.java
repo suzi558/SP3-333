@@ -5,11 +5,13 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    ArrayList<Media> movies = new ArrayList<>(); //A list to store Media objects representing movies.
+
 
     ArrayList<Media> series = new ArrayList<>(); //A list to store Media objects representing TV series
 
-    public static ArrayList<media> readData() {
+    public static ArrayList<Media> readData() {
+        ArrayList<Media> movies = new ArrayList<>(); //A list to store Media objects representing movies.
+
         try {
             Scanner scan = new Scanner(new File("film.txt"));
             while (scan.hasNextLine()) {          //Reads each line in

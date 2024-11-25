@@ -1,29 +1,49 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Netflix {
 
-    private ArrayList<Movies>  moviesList;
+public class Netflix {
+    private FileIO io;
+    private TextUI ui;
+
+
+    private ArrayList<Media> allList;
+    private ArrayList<Movies> moviesList ;
     private ArrayList<Series> seriesList;
 
 
-    Netflix(){
+
+
+    // Movies movie = new Movies(movieName, movieYear, movieRating); //Constructs a Movies object using the name, year, and rating.
+    // movies.add(movie); //Adds the Movies object to the movies list.
+
+    Netflix() {
+        this.ui = new TextUI();
+        this.io = new FileIO();
+
         this.moviesList = new ArrayList<>();
         this.seriesList = new ArrayList<>();
+        this.allList = new ArrayList<>();
+    }
+    public static void main(String[] args){
+
+
+
     }
 
+    void dataList(){
 
-
-    
-
-        //Test, 100 skal være længden af alle movies i tekstfilen
-    void moviesAddList() {
-        for (int i = 0; i < 100; i++) {
-            moviesList.add(i, new Movies(io.readData));
+        ArrayList<Media> allList = io.readData();
+       for (Media s : allList){
+           System.out.println(s);
         }
     }
+
+
+
+    public void moviesAddList() {
+    }
+
 
 
 
