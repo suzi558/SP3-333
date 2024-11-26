@@ -44,7 +44,14 @@ public class FileIO {
                 String[] lineData = line.split(";");
 
                 String seriesName = lineData[0].trim();
-                int seriesYears = Integer.parseInt(lineData[1].trim());
+                String yearString = lineData[1].trim();
+                int seriesYears;
+                if (yearString.contains("-")) {
+                    seriesYears = Integer.parseInt(yearString.split("-")[0].trim()); // Tag kun det første år
+                } else {
+                    seriesYears = Integer.parseInt(yearString.trim()); // Brug året direkte
+                }
+
 
                 ArrayList<String> seriesCategories = new ArrayList<>();
                 String[] seriesCategory = lineData[2].split(",");
@@ -58,6 +65,7 @@ public class FileIO {
                 for (String season : seasonsData) {
                     episodesPerSeason.add(season.trim());
                 }
+
                 Series series = new Series(seriesName, seriesYears, seriesCategories, seriesRating, episodesPerSeason);
                 seriesList.add(series); // Populate the existing list
             }

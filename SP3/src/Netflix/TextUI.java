@@ -84,7 +84,7 @@ public class TextUI {
         if (input == 1) {
             System.out.println("You choose movies, here's some options");
             for (int i = 0; i < medias.size(); i++) {
-                String movies = i + " - " + medias.get(i).getTitel() + "-" + medias.get(i).getReleaseDate() + "-" + medias.get(i).getRating();
+                String movies = i + " - " + medias.get(i).getTitel() + " - " + medias.get(i).getReleaseDate() + "- " + medias.get(i).getCategory() + " - " + medias.get(i).getRating();
                 System.out.println(movies);
             }
             chooseMovie();
@@ -92,8 +92,14 @@ public class TextUI {
 
         } else if (input == 2) {
             System.out.println("You chose series, here's some options:");
-            for (int i = 0; i < medias.size(); i++) {
-                System.out.println((i + 1) + ": " + medias.get(i).getTitel());
+            FileIO fileIO = new FileIO();
+            ArrayList<Media> series = fileIO.readSeries(); // Read series from the file
+            for (int i = 0; i < series.size(); i++) {
+                String seriesDetails = i + " - " + series.get(i).getTitel() + " - "
+                        + series.get(i).getReleaseDate() + " - "
+                        + series.get(i).getCategory() + " - "
+                        + series.get(i).getRating();
+                System.out.println(seriesDetails);
             }
             chooseSeries();
             youHaveChosenSeries();

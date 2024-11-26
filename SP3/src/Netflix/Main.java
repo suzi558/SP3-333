@@ -1,7 +1,4 @@
 package Netflix;
-
-import java.io.File;
-
 public class Main {
     public static void main(String[] args) {
         UserHandler userHandler = new UserHandler("C:\\Users\\elmir\\OneDrive\\Dokumenter\\SP3-333\\SP3\\data\\UserLogin.csv");
