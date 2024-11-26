@@ -1,5 +1,7 @@
 package Netflix;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,15 +21,23 @@ public class MovieHandler {
             System.out.println("No movies available.");
         } else {
             System.out.println("Available Movies:");
-            for (Media movie : movies) {
-                System.out.println(movie);
+            for (int i = 0; i < movies.size(); i++) {
+                Media movie = movies.get(i);
+                System.out.println((i + 1) + ": " + movie.getTitel() + " - " + movie.getReleaseDate() + " - " + movie.getCategory() + " - " + movie.getRating());
             }
         }
     }
 
     public void showSavedMovies() {
         System.out.println("Saved Movies:");
-        // Tilføj logik til at vise gemte film, hvis nødvendigt
+        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedMoviesList.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line); // Antager at hver linje er en gemt film
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading saved movies: " + e.getMessage());
+        }
     }
 
     public void displayMovies() {

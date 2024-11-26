@@ -29,19 +29,30 @@ public class TextUI {
     }
 
     private void userLogin() {
-        System.out.println("Enter your username:");
-        String username = scan.nextLine();
+        int passwordAttempts = 0; // Tæller for antal mislykkede loginforsøg
 
-        System.out.println("Enter your password:");
-        String password = scan.nextLine();
+        while (passwordAttempts < 3) { // Brugeren har op til 3 forsøg
+            System.out.println("Enter your username:");
+            String username = scan.nextLine();
 
-        if (userHandler.login(username, password)) {
-            System.out.println("Welcome to Netflix Stream, " + username + "!");
-            showMediaMenu();
-        } else {
-            System.out.println("Invalid credentials. Please try again.");
+            System.out.println("Enter your password:");
+            String password = scan.nextLine();
+
+            if (userHandler.login(username, password)) {
+                System.out.println("Welcome to Netflix Stream, " + username + "!");
+                showMediaMenu(); // Gå til mediamenuen, hvis login er succesfuldt
+                return; // Afslut login-metoden og fortsæt til mediamenuen
+            } else {
+                passwordAttempts++; // Øg tælleren, hvis login mislykkes
+                System.out.println("Invalid credentials. Please try again.");
+            }
         }
+
+        // Hvis brugeren når 3 mislykkede loginforsøg
+        System.out.println("Maximum login attempts have been reached. Shutting down...");
+        // Her kan du vælge at afslutte applikationen eller stoppe yderligere logik
     }
+
 
     private void createUser() {
         System.out.println("Enter your full name:");
@@ -71,7 +82,10 @@ public class TextUI {
 
         String choice = scan.nextLine();
         switch (choice) {
-            case "1" -> movieHandler.showMovies();
+            case "1" -> {
+                movieHandler.showMovies();
+                movieHandler.chooseMovie();  // Call chooseMovie() after showing movies
+            }
             case "2" -> {
                 seriesHandler.showSeries();      // Viser serierne
                 seriesHandler.chooseSeries();    // Giver brugeren mulighed for at vælge og handle på en serie

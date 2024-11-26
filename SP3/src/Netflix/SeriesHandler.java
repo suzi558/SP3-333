@@ -1,5 +1,7 @@
 package Netflix;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,15 +21,24 @@ public class SeriesHandler {
             System.out.println("No series available.");
         } else {
             System.out.println("Available Series:");
-            for (Media serie : series) {
-                System.out.println(serie);
+            for (int i = 0; i < series.size(); i++) {
+                Media serie = series.get(i);
+                // Nummeret i listen starter fra 1 (i + 1)
+                System.out.println((i + 1) + ": " + serie.getTitel() + " - " + serie.getReleaseDate() + " - " + serie.getCategory() + " - " + serie.getRating());
             }
         }
     }
 
     public void showSavedSeries() {
         System.out.println("Saved Series:");
-        // Tilføj logik til at vise gemte serier, hvis nødvendigt
+        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line); // Antager at hver linje er en gemt serie
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading saved series: " + e.getMessage());
+        }
     }
 
     public void displaySeries() {
