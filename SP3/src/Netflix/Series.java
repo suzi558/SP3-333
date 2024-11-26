@@ -36,12 +36,6 @@ public class Series extends Media {
 
     @Override
     public String toString() {
-        return "Netflix.Series{" +
-                "episodesPerSeason=" + episodesPerSeason +
-                ", titel='" + titel + '\'' +
-                ", rating=" + rating +
-                ", releaseDate=" + releaseDate +
-                ", categories=" + categories +
-                '}';
+        return titel + " - " + releaseDate + " - " + categories + " - " + rating + " - " + episodesPerSeason;
     }
 }

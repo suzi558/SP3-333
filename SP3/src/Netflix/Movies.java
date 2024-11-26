@@ -23,5 +23,8 @@ public class Movies extends Media {
         return this.categories;
     }
 
-
+    @Override
+    public String toString() {
+        return titel + " - " + releaseDate + " - " + categories + " - " + rating + " - ";
+    }
 }
