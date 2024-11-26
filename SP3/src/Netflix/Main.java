@@ -27,6 +27,6 @@ public class Main {
 
         MovieAndSeriesLab.series = fileIO.readSeries();
         TextUI text2 = new TextUI(userHandler);
-        text.pickMedia(MovieAndSeriesLab.series);
+        text2.pickMedia(MovieAndSeriesLab.series);
     }
 }
