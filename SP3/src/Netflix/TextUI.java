@@ -1,5 +1,7 @@
 package Netflix;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,7 +62,7 @@ public class TextUI {
 
         if(userHandler.createUser(username, password, fullname)){
             userHandler.saveUsers();
-            System.out.println("Welcome to Chills  " + username);
+            System.out.println("Welcome to Netflix  " + username);
             System.out.println("\n\n");
         } else{
             System.out.println("Invalid username or password. Please log in or sign up.");
@@ -94,8 +96,15 @@ public class TextUI {
             }
             chooseSeries();
             youHaveChosenSeries();
+
         }  else if (input == 3) {
-            System.out.println("You choose your saved list: ");
+            System.out.println("You choose your saved movie list: ");
+            try {
+                File file = new File()
+
+            } catch (FileNotFoundException e){
+
+            }
         }
     }
 
