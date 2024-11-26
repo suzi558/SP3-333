@@ -78,12 +78,13 @@ public class TextUI {
         System.out.println("1-Movies");
         System.out.println("2-Series");
         System.out.println("3-saved movies");
+        System.out.println("4-saved series");
         int input = scan.nextInt();
         scan.nextLine();
         if (input == 1) {
             System.out.println("You choose movies, here's some options");
             for (int i = 0; i < medias.size(); i++) {
-                String movies = i + " - " + medias.get(i).getTitel();
+                String movies = i + " - " + medias.get(i).getTitel() + "-" + medias.get(i).getReleaseDate() + "-" + medias.get(i).getRating();
                 System.out.println(movies);
             }
             chooseMovie();
@@ -100,10 +101,33 @@ public class TextUI {
         }  else if (input == 3) {
             System.out.println("You choose your saved movie list: ");
             try {
-                File file = new File()
+                File file = new File("SP3/Data/SavedMoviesList.csv");
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String data = scanner.nextLine();
+                    System.out.println(data);
+                }
+                scanner.close();
 
             } catch (FileNotFoundException e){
+                System.out.println("An error occurred.");
+                //e.printStackTrace();
+            }
+        }
+        else if (input == 4) {
+            System.out.println("You choose your saved series list: ");
+            try {
+                File file = new File("SP3/Data/SavedSeriesList.csv");
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String data = scanner.nextLine();
+                    System.out.println(data);
+                }
+                scanner.close();
 
+            } catch (FileNotFoundException e){
+                System.out.println("An error occurred.");
+                //e.printStackTrace();
             }
         }
     }
