@@ -3,16 +3,17 @@ package Netflix;
 import java.util.Scanner;
 
 public class TextUI {
-    private Scanner scan;
-    private UserHandler userHandler;
-    private MovieHandler movieHandler;
-    private SeriesHandler seriesHandler;
+    private Scanner scan;   // Bruges til at læse brugerinput fra konsollen.
+    private UserHandler userHandler; //Håndterer brugere (f.eks. login og oprettelse).
+    private MovieHandler movieHandler; //Håndterer filmdata (f.eks. visning og valg af film).
+    private SeriesHandler seriesHandler; // Håndterer seriedata (f.eks. visning og valg af serier).
 
     public TextUI(UserHandler userHandler, MovieHandler movieHandler, SeriesHandler seriesHandler) {
+        //Initialiserer attributterne, så TextUI kan kommunikere med de andre klasser.
         this.userHandler = userHandler;
         this.movieHandler = movieHandler;
         this.seriesHandler = seriesHandler;
-        this.scan = new Scanner(System.in);
+        this.scan = new Scanner(System.in); //Opretter en Scanner til at læse brugerinput.
     }
 
     public void start() {
@@ -38,9 +39,9 @@ public class TextUI {
             System.out.println("Enter your password:");
             String password = scan.nextLine();
 
-            if (userHandler.login(username, password)) {
+            if (userHandler.login(username, password)) { //Kalder userHandler.login(username, password) for at validere login.
                 System.out.println("Welcome to Netflix Stream, " + username + "!");
-                showMediaMenu(); // Gå til mediamenuen, hvis login er succesfuldt
+                showMediaMenu(); // Gå til mediamenuen, hvis login er succesfuldt/
                 return; // Afslut login-metoden og fortsæt til mediamenuen
             } else {
                 passwordAttempts++; // Øg tælleren, hvis login mislykkes
@@ -50,10 +51,10 @@ public class TextUI {
 
         // Hvis brugeren når 3 mislykkede loginforsøg
         System.out.println("Maximum login attempts have been reached. Shutting down...");
-        // Her kan du vælge at afslutte applikationen eller stoppe yderligere logik
+      start();
     }
 
-
+    //Håndterer oprettelse af nye brugere.
     private void createUser() {
         System.out.println("Enter your full name:");
         String fullname = scan.nextLine();
@@ -64,8 +65,8 @@ public class TextUI {
         System.out.println("Create a password:");
         String password = scan.nextLine();
 
-        if (userHandler.createUser(username, password, fullname)) {
-            userHandler.saveUsers();
+        if (userHandler.createUser(username, password, fullname)) { //Kalder userHandler.createUser for at oprette brugeren.
+            userHandler.saveUsers(); //Kalder userHandler.saveUsers() for at gemme brugerdata.
             System.out.println("User created successfully. Welcome, " + username + "!");
             showMediaMenu();
         } else {
@@ -81,17 +82,17 @@ public class TextUI {
         System.out.println("4: Saved Series");
 
         String choice = scan.nextLine();
-        switch (choice) {
+        switch (choice) { //For film: Kalder movieHandler.showMovies() og movieHandler.chooseMovie().
             case "1" -> {
                 movieHandler.showMovies();
                 movieHandler.chooseMovie();  // Call chooseMovie() after showing movies
             }
-            case "2" -> {
+            case "2" -> { //For serier: Kalder seriesHandler.showSeries() og seriesHandler.chooseSeries().
                 seriesHandler.showSeries();      // Viser serierne
                 seriesHandler.chooseSeries();    // Giver brugeren mulighed for at vælge og handle på en serie
             }
-            case "3" -> movieHandler.showSavedMovies();
-            case "4" -> seriesHandler.showSavedSeries();
+            case "3" -> movieHandler.showSavedMovies(); //For gemte medier: Viser enten gemte film eller serier.
+            case "4" -> seriesHandler.showSavedSeries(); //For andet input: Informerer om ugyldigt valg.
             default -> System.out.println("Invalid input. Please try again.");
         }
     }

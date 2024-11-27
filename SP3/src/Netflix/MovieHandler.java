@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MovieHandler {
-    private ArrayList<Media> movies;
-    private Scanner scan;
+    private ArrayList<Media> movies; //En liste over film. Hver film er repræsenteret som et Media-objekt.
+    private Scanner scan; //Bruges til at læse input fra brugeren.
 
     public MovieHandler(ArrayList<Media> movies) {
-        this.movies = movies;
-        this.scan = new Scanner(System.in);
+        this.movies = movies; //Initialiserer listen over film (movies), så klassen ved, hvilke film den skal arbejde med.
+        this.scan = new Scanner(System.in); //Opretter en Scanner til at håndtere brugerinput.
     }
 
     public void showMovies() {
