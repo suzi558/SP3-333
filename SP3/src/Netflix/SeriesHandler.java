@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class SeriesHandler {
     private ArrayList<Media> series; //En liste over serier. Hver serie er repræsenteret som et Media-objekt.
     private Scanner scan; // Bruges til at læse input fra brugeren.
+    private TextUI textUI;
 
     public SeriesHandler(ArrayList<Media> series) { //
         this.series = series; //Initialiserer listen over serier (series), så klassen ved, hvilke serier den skal arbejde med.
@@ -24,20 +25,67 @@ public class SeriesHandler {
             for (int i = 0; i < series.size(); i++) { //Itererer gennem listen over serier.
                 Media serie = series.get(i);
                 // Nummeret i listen starter fra 1 (i + 1)
-                System.out.println((i + 1) + ": " + serie.getTitel() + " - " + serie.getReleaseDate() + " - " + serie.getCategory() + " - " + serie.getRating());
+                System.out.println((i + 1) + serie.toString());
             }
         }
     }
 
     public void showSavedSeries() {
         System.out.println("Saved Series:");
-        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) { //Læser hver linje og udskriver den.
-            String line; //Hver linje repræsenterer en gemt serie.
+
+        ArrayList<String> savedSeries = new ArrayList<>(); // Store the saved series in a list
+        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) {
+            String line;
+            int index = 1; // Add numbering to the saved series
             while ((line = reader.readLine()) != null) {
-                System.out.println(line); // Antager at hver linje er en gemt serie
+                savedSeries.add(line); // Add each series to the list
+                System.out.println(index + ": " + line); // Display numbered list
+                index++;
             }
-        } catch (IOException e) { //Hvis der opstår en fejl (f.eks. filen findes ikke), udskrives en fejlmeddelelse: "Error loading saved series."
+            if (savedSeries.isEmpty()) {
+                System.out.println("No saved series found.");
+            } else {
+                showPlayOrBackMenu(savedSeries); // Show options after displaying series
+            }
+        } catch (IOException e) {
             System.out.println("Error loading saved series: " + e.getMessage());
+        }
+    }
+
+    private void showPlayOrBackMenu(ArrayList<String> savedSeries) {
+        System.out.println("Choose an option:");
+        System.out.println("1: Play a saved series");
+        System.out.println("2: Back to menu");
+
+        try {
+            int choice = scan.nextInt();
+            scan.nextLine(); // Clear buffer
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter the number of the series you want to play:");
+                    int seriesChoice = scan.nextInt();
+                    scan.nextLine(); // Clear buffer
+
+                    // Validate the user's choice
+                    if (seriesChoice > 0 && seriesChoice <= savedSeries.size()) {
+                        System.out.println("Playing series: " + savedSeries.get(seriesChoice - 1));
+                    } else {
+                        System.out.println("Invalid series number. Please try again.");
+                        showPlayOrBackMenu(savedSeries); // Show menu again
+                    }
+                    break;
+                case 2:
+                    textUI.showMediaMenu(); // Go back to the main menu
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    showPlayOrBackMenu(savedSeries); // Show menu again
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a number.");
+            scan.nextLine(); // Clear buffer
+            showPlayOrBackMenu(savedSeries); // Show menu again
         }
     }
 

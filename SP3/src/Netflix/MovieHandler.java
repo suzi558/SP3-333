@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class MovieHandler {
     private ArrayList<Media> movies; //En liste over film. Hver film er repræsenteret som et Media-objekt.
     private Scanner scan; //Bruges til at læse input fra brugeren.
+    private TextUI textUI;
 
     public MovieHandler(ArrayList<Media> movies) {
         this.movies = movies; //Initialiserer listen over film (movies), så klassen ved, hvilke film den skal arbejde med.
@@ -23,24 +24,49 @@ public class MovieHandler {
             System.out.println("Available Movies:");
             for (int i = 0; i < movies.size(); i++) {
                 Media movie = movies.get(i);
-                System.out.println((i + 1) + ": " + movie.getTitel() + " - " + movie.getReleaseDate() + " - " + movie.getCategory() + " - " + movie.getRating());
+                System.out.println((i + 1) + movie.toString());
             }
         }
     }
 
-    public void showSavedMovies() {
-        System.out.println("Saved Movies:");
-        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedMoviesList.csv"))) {
+    public void showSavedSeries() {
+        System.out.println("Saved Series:");
+        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line); // Antager at hver linje er en gemt film
+                System.out.println(line); // Antager at hver linje er en gemt serie
             }
+            showPlayOrBackMenu(); // Efter visning af gemte serier, vis muligheder
         } catch (IOException e) {
-            System.out.println("Error loading saved movies: " + e.getMessage());
+            System.out.println("Error loading saved series: " + e.getMessage());
         }
     }
 
-    public void displayMovies() {
+    public void showPlayOrBackMenu() {
+        System.out.println("Choose an option:");
+        System.out.println("1: Play the series");
+        System.out.println("2: Back to menu");
+        int choice = scan.nextInt();
+        scan.nextLine(); // Clear buffer
+
+        switch (choice) {
+            case 1:
+                // Logik for at spille serien
+                System.out.println("Enter the number of the series you want to play:");
+                int seriesChoice = scan.nextInt();
+                // Kald metoden til at spille serien
+                System.out.println("Playing series: " + seriesChoice);
+                break;
+            case 2:
+                textUI.showMediaMenu(); // Gå tilbage til menuen
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                showPlayOrBackMenu(); // Vis menuen igen
+        }
+    }
+
+    /*public void displayMovies() {
         System.out.println("You chose movies, here's some options:");
         for (int i = 0; i < movies.size(); i++) {
             String movieDetails = i + " - " + movies.get(i).getTitel() + " - "
@@ -49,7 +75,7 @@ public class MovieHandler {
                     + movies.get(i).getRating();
             System.out.println(movieDetails);
         }
-    }
+    } */
 
     public void chooseMovie() {
         System.out.println("\nPlease press the number of the movie you want to watch:");

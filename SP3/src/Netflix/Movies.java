@@ -25,6 +25,6 @@ public class Movies extends Media {
 
     @Override
     public String toString() {
-        return titel + " - " + releaseDate + " - " + categories + " - " + rating + " - ";
+        return titel + " - " + releaseDate + " - " + categories + " - " + rating;
     }
 }
