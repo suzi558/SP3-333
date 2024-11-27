@@ -20,9 +20,9 @@ public class Main {
         SeriesHandler seriesHandler = new SeriesHandler(series);
 
         // Initialiser TextUI med nødvendige handler-klasser
-        TextUI textUI = new TextUI(userHandler, movieHandler, seriesHandler);
+        Netflix netflix = new Netflix(userHandler, movieHandler, seriesHandler);
 
         // Start brugergrænsefladen
-        textUI.start();
+        netflix.start();
     }
 }

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class SeriesHandler {
     private ArrayList<Media> series; //En liste over serier. Hver serie er repræsenteret som et Media-objekt.
     private Scanner scan; // Bruges til at læse input fra brugeren.
-    private TextUI textUI;
+    private Netflix netflix;
 
     public SeriesHandler(ArrayList<Media> series) { //
         this.series = series; //Initialiserer listen over serier (series), så klassen ved, hvilke serier den skal arbejde med.
@@ -76,7 +76,7 @@ public class SeriesHandler {
                     }
                     break;
                 case 2:
-                    textUI.showMediaMenu(); // Go back to the main menu
+                    netflix.showMediaMenu(); // Go back to the main menu
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

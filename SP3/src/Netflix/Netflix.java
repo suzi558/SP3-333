@@ -2,33 +2,42 @@ package Netflix;
 
 import java.util.Scanner;
 
-public class TextUI {
+//Netflix er ansvarlig for at håndtere interaktionen mellem brugeren og systemet.
+// Den fungerer som en brugergrænseflade, der:
+//Giver adgang til login og brugeroprettelse.
+//Forbinder brugerinput med de relevante handler-klasser: UserHandler, MovieHandler, og SeriesHandler.
+//Viser menuer og muligheder, så brugeren kan vælge handlinger.
+
+
+public class Netflix {
     private Scanner scan;   // Bruges til at læse brugerinput fra konsollen.
     private UserHandler userHandler; //Håndterer brugere (f.eks. login og oprettelse).
     private MovieHandler movieHandler; //Håndterer filmdata (f.eks. visning og valg af film).
     private SeriesHandler seriesHandler; // Håndterer seriedata (f.eks. visning og valg af serier).
 
-    public TextUI(UserHandler userHandler, MovieHandler movieHandler, SeriesHandler seriesHandler) {
-        //Initialiserer attributterne, så TextUI kan kommunikere med de andre klasser.
+    public Netflix(UserHandler userHandler, MovieHandler movieHandler, SeriesHandler seriesHandler) {
+        //Initialiserer attributterne, så netflix kan kommunikere med de andre klasser.
         this.userHandler = userHandler;
         this.movieHandler = movieHandler;
         this.seriesHandler = seriesHandler;
         this.scan = new Scanner(System.in); //Opretter en Scanner til at læse brugerinput.
     }
 
-    public void start() {
+    //Formål: Starter programmet og giver brugeren mulighed for at logge ind eller oprette en ny bruger.
+    public void start() { //Viser en velkomstbesked og valgmuligheder for login (1) eller oprettelse (2).
         System.out.println("Welcome to Netflix Stream!");
         System.out.println("1: Log in");
         System.out.println("2: Sign up");
         String choice = scan.nextLine();
 
         switch (choice) {
-            case "1" -> userLogin();
-            case "2" -> createUser();
+            case "1" -> userLogin(); //kalder metoden
+            case "2" -> createUser(); //kalder metoden
             default -> System.out.println("Invalid input. Please try again.");
         }
     }
 
+    //Formål: Giver brugeren mulighed for at logge ind.
     private void userLogin() {
         int passwordAttempts = 0; // Tæller for antal mislykkede loginforsøg
 
@@ -54,7 +63,7 @@ public class TextUI {
       start();
     }
 
-    //Håndterer oprettelse af nye brugere.
+    //Formål: Håndterer oprettelse af nye brugere.
     private void createUser() {
         System.out.println("Enter your full name:");
         String fullname = scan.nextLine();
@@ -68,12 +77,14 @@ public class TextUI {
         if (userHandler.createUser(username, password, fullname)) { //Kalder userHandler.createUser for at oprette brugeren.
             userHandler.saveUsers(); //Kalder userHandler.saveUsers() for at gemme brugerdata.
             System.out.println("User created successfully. Welcome, " + username + "!");
-            showMediaMenu();
+            showMediaMenu(); //Viser en velkomstbesked og kalder showMediaMenu().
         } else {
             System.out.println("Failed to create user. Please try again.");
         }
     }
 
+    //Formål: Viser hovedmenuen for medier og giver brugeren mulighed for at vælge mellem film,
+    // serier eller gemte medier.
     public void showMediaMenu() {
         System.out.println("Choose an option:");
         System.out.println("1: Movies");
@@ -82,10 +93,12 @@ public class TextUI {
         System.out.println("4: Saved Series");
 
         String choice = scan.nextLine();
+        //Læser brugerens valg og kalder de relevante metoder
+
         switch (choice) { //For film: Kalder movieHandler.showMovies() og movieHandler.chooseMovie().
             case "1" -> {
-                movieHandler.showMovies();
-                movieHandler.chooseMovie();  // Call chooseMovie() after showing movies
+                movieHandler.showMovies(); //viser film
+                movieHandler.chooseMovie();  // kalder  chooseMovie() efter vising af movies
             }
             case "2" -> { //For serier: Kalder seriesHandler.showSeries() og seriesHandler.chooseSeries().
                 seriesHandler.showSeries();      // Viser serierne
@@ -97,3 +110,10 @@ public class TextUI {
         }
     }
 }
+
+//Kort opsummering
+//Netflix fungerer som bindeleddet mellem brugerinput og systemets funktionalitet.
+//Den bruger:
+//UserHandler til at logge ind eller oprette brugere.
+//MovieHandler og SeriesHandler til at vise og håndtere film og serier.
+//Fejlhåndtering sikrer, at programmet ikke crasher ved ugyldigt input.

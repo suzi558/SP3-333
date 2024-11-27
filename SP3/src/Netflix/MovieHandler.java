@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class MovieHandler {
     private ArrayList<Media> movies; //En liste over film. Hver film er repræsenteret som et Media-objekt.
     private Scanner scan; //Bruges til at læse input fra brugeren.
-    private TextUI textUI;
+    private Netflix netflix;
 
     public MovieHandler(ArrayList<Media> movies) {
         this.movies = movies; //Initialiserer listen over film (movies), så klassen ved, hvilke film den skal arbejde med.
@@ -67,7 +67,7 @@ public class MovieHandler {
                 System.out.println("Playing series: " + seriesChoice);
                 break;
             case 2:
-                textUI.showMediaMenu(); // Gå tilbage til menuen
+                netflix.showMediaMenu(); // Gå tilbage til menuen
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
