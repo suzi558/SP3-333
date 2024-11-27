@@ -1,4 +1,4 @@
-package Netflix;
+package NetflixStream;
 
 import java.util.Scanner;
 

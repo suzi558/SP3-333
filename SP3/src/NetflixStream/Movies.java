@@ -1,4 +1,4 @@
-package Netflix;
+package NetflixStream;
 import java.util.ArrayList;
 
 public class Movies extends Media {

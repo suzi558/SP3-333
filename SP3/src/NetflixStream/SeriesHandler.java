@@ -1,4 +1,4 @@
-package Netflix;
+package NetflixStream;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -89,16 +89,6 @@ public class SeriesHandler {
         }
     }
 
-    /*public void displaySeries() {
-        System.out.println("You chose series, here's some options:");
-        for (int i = 0; i < series.size(); i++) {
-            String seriesDetails = i + " - " + series.get(i).getTitel() + " - "
-                    + series.get(i).getReleaseDate() + " - "
-                    + series.get(i).getCategory() + " - "
-                    + series.get(i).getRating();
-            System.out.println(seriesDetails);
-        }
-    }*/
 
     //Denne metode lader brugeren vælge en serie og beslutte, hvad der skal ske med den.
     public void chooseSeries() {

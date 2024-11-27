@@ -1,4 +1,4 @@
-package Netflix;
+package NetflixStream;
 
 import java.io.File;
 import java.io.FileNotFoundException;

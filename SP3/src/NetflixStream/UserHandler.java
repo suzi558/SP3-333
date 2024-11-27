@@ -1,4 +1,4 @@
-package Netflix;
+package NetflixStream;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,7 +35,7 @@ public class UserHandler {
                 return false; //If the username exists, returns false.
 
         }
-        users.add(new User(fullName, password, username)); //Creates a new Netflix.User object with the provided details and adds it to the users list
+        users.add(new User(fullName, password, username)); //Creates a new NetflixStream.User object with the provided details and adds it to the users list
         return true; //Returns true if the user is successfully created.
     }
 
@@ -54,7 +54,7 @@ public class UserHandler {
             while (scanner.hasNextLine()) { //Reads the file line by line.
                 String input = scanner.nextLine();
                 String[] values = input.split(","); //Splits each line into parts (comma-separated values).
-                users.add(new User(values[0], values[1], values[2])); //Creates a new Netflix.User object for each line and adds it to the users list.
+                users.add(new User(values[0], values[1], values[2])); //Creates a new NetflixStream.User object for each line and adds it to the users list.
             }
 
         } catch (FileNotFoundException e) {
