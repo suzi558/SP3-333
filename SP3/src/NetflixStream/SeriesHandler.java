@@ -10,13 +10,14 @@ import java.util.Scanner;
 public class SeriesHandler {
     private ArrayList<Media> series; //En liste over serier. Hver serie er repræsenteret som et Media-objekt.
     private Scanner scan; // Bruges til at læse input fra brugeren.
-    private Netflix netflix;
+    private Netflix netflix; // Muliggør adgang til hovedmenuen via metoden showMediaMenu()
 
     public SeriesHandler(ArrayList<Media> series) { //
         this.series = series; //Initialiserer listen over serier (series), så klassen ved, hvilke serier den skal arbejde med.
         this.scan = new Scanner(System.in); //Opretter en Scanner til at håndtere brugerinput
     }
 
+    //Formål: Viser alle serier i series-listen.
     public void showSeries() {
         if (series.isEmpty()) { //Hvis listen over serier (series) er tom, udskrives beskeden: "No series available."
             System.out.println("No series available.");
@@ -30,34 +31,39 @@ public class SeriesHandler {
         }
     }
 
+    //Formål: Viser gemte serier fra en CSV-fil.
     public void showSavedSeries() {
         System.out.println("Saved Series:");
 
-        ArrayList<String> savedSeries = new ArrayList<>(); // Store the saved series in a list
+        ArrayList<String> savedSeries = new ArrayList<>(); //Læser data fra SavedSeriesList.csv linje for linje.
         try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) {
             String line;
             int index = 1; // Add numbering to the saved series
             while ((line = reader.readLine()) != null) {
-                savedSeries.add(line); // Add each series to the list
+                savedSeries.add(line); //Tilføjer hver serie til en liste
                 System.out.println(index + ": " + line); // Display numbered list
-                index++;
+                index++; //viser dem med nummerering.
             }
-            if (savedSeries.isEmpty()) {
+            if (savedSeries.isEmpty()) { //Hvis listen er tom, vises en besked.
                 System.out.println("No saved series found.");
             } else {
-                showPlayOrBackMenu(savedSeries); // Show options after displaying series
+                showPlayOrBackMenu(savedSeries);
+                //Giver brugeren mulighed for at afspille en gemt serie eller
+                // vende tilbage til hovedmenuen via showPlayOrBackMenu().
             }
         } catch (IOException e) {
             System.out.println("Error loading saved series: " + e.getMessage());
         }
     }
 
+    //Formål: Lader brugeren vælge, om de vil afspille en gemt serie eller vende tilbage til menuen.
     private void showPlayOrBackMenu(ArrayList<String> savedSeries) {
+        //Viser to valg: afspil eller tilbage.
         System.out.println("Choose an option:");
         System.out.println("1: Play a saved series");
         System.out.println("2: Back to menu");
 
-        try {
+        try { //Kontrollerer om valget er gyldigt.
             int choice = scan.nextInt();
             scan.nextLine(); // Clear buffer
 
@@ -67,7 +73,7 @@ public class SeriesHandler {
                     int seriesChoice = scan.nextInt();
                     scan.nextLine(); // Clear buffer
 
-                    // Validate the user's choice
+                    //Afspiller serien eller viser en fejlbesked.
                     if (seriesChoice > 0 && seriesChoice <= savedSeries.size()) {
                         System.out.println("Playing series: " + savedSeries.get(seriesChoice - 1));
                     } else {
@@ -76,7 +82,7 @@ public class SeriesHandler {
                     }
                     break;
                 case 2:
-                    netflix.showMediaMenu(); // Go back to the main menu
+                    netflix.showMediaMenu(); //Vender tilbage til hovedmenuen via netflix.showMediaMenu()
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -97,7 +103,8 @@ public class SeriesHandler {
         try {
             int seriesNumberToWatch = scan.nextInt(); //Finder serien baseret på brugerens valg.
             scan.nextLine(); // Clear buffer
-            System.out.println("You have chosen: " + series.get(seriesNumberToWatch).getTitel()); //Udskriver serien, som brugeren har valgt.
+            System.out.println("You have chosen: " + series.get(seriesNumberToWatch).getTitel());
+            //Udskriver serien, som brugeren har valgt.
 
             //Præsenterer to muligheder
             System.out.println("What would you like to do?");
@@ -133,4 +140,11 @@ public class SeriesHandler {
             System.out.println("Option does not exist, please choose the available options.");
         }
     }
+
+    //Overordnet proces
+    //Brugeren kan se en liste over tilgængelige eller gemte serier.
+    //Brugeren vælger en serie og kan:
+    //Afspille den.
+    //Gemme den til deres liste.
+    //Serien gemmes eller afspilles baseret på brugerens valg.
 }
