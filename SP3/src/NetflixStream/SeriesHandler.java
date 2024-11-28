@@ -7,16 +7,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Klasseoversigt
+//SeriesHandler håndterer:
+//Visning af tilgængelige serier.
+//Visning og håndtering af gemte serier.
+//Valg og afspilning af en serie.
+//Gemning af en serie til brugerens liste.
+
 public class SeriesHandler {
     private ArrayList<Media> series; //En liste over serier. Hver serie er repræsenteret som et Media-objekt.
     private Scanner scan; // Bruges til at læse input fra brugeren.
-    private Netflix netflix;
+    private Netflix netflix; //Reference til hovedklassen (bruges til at navigere tilbage til menuen)
 
     public SeriesHandler(ArrayList<Media> series) { //
         this.series = series; //Initialiserer listen over serier (series), så klassen ved, hvilke serier den skal arbejde med.
         this.scan = new Scanner(System.in); //Opretter en Scanner til at håndtere brugerinput
     }
 
+    //Formål: Viser alle serier i series-listen.
     public void showSeries() {
         if (series.isEmpty()) { //Hvis listen over serier (series) er tom, udskrives beskeden: "No series available."
             System.out.println("No series available.");
@@ -25,21 +33,22 @@ public class SeriesHandler {
             for (int i = 0; i < series.size(); i++) { //Itererer gennem listen over serier.
                 Media serie = series.get(i);
                 // Nummeret i listen starter fra 1 (i + 1)
-                System.out.println((i + 1) + serie.toString());
+                System.out.println((i + 1) + " : " + serie.toString());
             }
         }
     }
 
+    //Formål: Viser gemte serier fra en CSV-fil.
     public void showSavedSeries() {
         System.out.println("Saved Series:");
 
         ArrayList<String> savedSeries = new ArrayList<>(); // Store the saved series in a list
-        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) { //læser data fra SavedSeriesList.csv linje for linje.
             String line;
             int index = 1; // Add numbering to the saved series
             while ((line = reader.readLine()) != null) {
-                savedSeries.add(line); // Add each series to the list
-                System.out.println(index + ": " + line); // Display numbered list
+                savedSeries.add(line); // Tilføjer hver serie til en liste og viser dem med nummerering.
+                System.out.println(index + " : " + line); // Display numbered list
                 index++;
             }
             if (savedSeries.isEmpty()) {
@@ -52,12 +61,14 @@ public class SeriesHandler {
         }
     }
 
+    //Formål: Lader brugeren vælge, om de vil afspille en gemt serie eller vende tilbage til menuen.
     private void showPlayOrBackMenu(ArrayList<String> savedSeries) {
+        //Viser to valg: afspil eller tilbage
         System.out.println("Choose an option:");
         System.out.println("1: Play a saved series");
         System.out.println("2: Back to menu");
 
-        try {
+        try { //Kontrollerer om valget er gyldigt.
             int choice = scan.nextInt();
             scan.nextLine(); // Clear buffer
 
@@ -67,7 +78,7 @@ public class SeriesHandler {
                     int seriesChoice = scan.nextInt();
                     scan.nextLine(); // Clear buffer
 
-                    // Validate the user's choice
+                    //Afspiller serien eller viser en fejlbesked.
                     if (seriesChoice > 0 && seriesChoice <= savedSeries.size()) {
                         System.out.println("Playing series: " + savedSeries.get(seriesChoice - 1));
                     } else {
@@ -75,7 +86,7 @@ public class SeriesHandler {
                         showPlayOrBackMenu(savedSeries); // Show menu again
                     }
                     break;
-                case 2:
+                case 2: //Vender tilbage til hovedmenuen via netflix.showMediaMenu().
                     netflix.showMediaMenu(); // Go back to the main menu
                     break;
                 default:

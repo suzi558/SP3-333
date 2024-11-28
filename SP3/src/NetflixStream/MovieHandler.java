@@ -29,7 +29,7 @@ public class MovieHandler {
             System.out.println("Available Movies:");
             for (int i = 0; i < movies.size(); i++) {
                 Media movie = movies.get(i);
-                System.out.println((i + 1) + movie.toString());
+                System.out.println((i + 1) + "-" + movie.toString());
             }
         }
     }
