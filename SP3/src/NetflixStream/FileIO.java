@@ -60,13 +60,26 @@ public class FileIO {
                 }
                 double seriesRating = Double.parseDouble(lineData[3].trim().replace(',', '.'));
 
-                ArrayList<String> episodesPerSeason = new ArrayList<>();
-                String[] seasonsData = lineData[4].split(",");
-                for (String season : seasonsData) {
-                    episodesPerSeason.add(season.trim());
+
+                //Sæsonogepisoder
+                ArrayList<Integer>seasonsList = new ArrayList<>();
+                ArrayList<Integer>episodeList = new ArrayList<>();
+
+                String[]seasonSep=lineData[4].split(",");
+                for (String sep : seasonSep){
+                    String[]seasonEpisode=sep.split("-");
+
+                    if(seasonEpisode.length==2){
+                        int season = Integer.parseInt(seasonEpisode[0].trim());
+                        int episode = Integer.parseInt(seasonEpisode[1].trim());
+
+                        seasonsList.add(season);
+                        episodeList.add(episode);
+                    }
                 }
 
-                Series series = new Series(seriesName, seriesYears, seriesCategories, seriesRating, episodesPerSeason);
+
+                Series series = new Series(seriesName, seriesYears, seriesCategories, seriesRating, seasonsList, episodeList);
                 seriesList.add(series); // Populate the existing list
             }
         } catch (FileNotFoundException e) {
