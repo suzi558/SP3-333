@@ -15,10 +15,6 @@ public class Main {
         ArrayList<Media> movies = fileIO.readMovieData(); // kaldes for at indlæse en liste af film (af typen Media).
         ArrayList<Media> series = fileIO.readSeries();    // kaldes for at indlæse en liste af serier (af typen Media).
 
-        // Initialiser MovieHandler og SeriesHandler med data
-        //MovieHandler movieHandler = new MovieHandler(movies);
-        //SeriesHandler seriesHandler = new SeriesHandler(series);
-
         // Initialiser TextUI med nødvendige handler-klasser
         Netflix netflix = new Netflix(userHandler, movies, series);
 

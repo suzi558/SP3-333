@@ -25,10 +25,4 @@ public class User {
     public String getFullName() {
         return fullName;
     }
-    public void watchedMovies (Media movie) {
-        watchedMovies.add(movie);
-    }
-    public void savedMovies (Media movie) {
-        savedMovies.add(movie);
-    }
 }
