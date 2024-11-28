@@ -19,9 +19,10 @@ public class SeriesHandler {
     private Scanner scan; // Bruges til at læse input fra brugeren.
     private Netflix netflix; //Reference til hovedklassen (bruges til at navigere tilbage til menuen)
 
-    public SeriesHandler(ArrayList<Media> series) { //
+    public SeriesHandler(ArrayList<Media> series, Netflix netflix) { //
         this.series = series; //Initialiserer listen over serier (series), så klassen ved, hvilke serier den skal arbejde med.
         this.scan = new Scanner(System.in); //Opretter en Scanner til at håndtere brugerinput
+        this.netflix = netflix;
     }
 
     //Formål: Viser alle serier i series-listen.

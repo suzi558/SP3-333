@@ -1,5 +1,6 @@
 package NetflixStream;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //Netflix er ansvarlig for at håndtere interaktionen mellem brugeren og systemet.
@@ -14,13 +15,17 @@ public class Netflix {
     private UserHandler userHandler; //Håndterer brugere (f.eks. login og oprettelse).
     private MovieHandler movieHandler; //Håndterer filmdata (f.eks. visning og valg af film).
     private SeriesHandler seriesHandler; // Håndterer seriedata (f.eks. visning og valg af serier).
+    private ArrayList<Media> movies;
+    private ArrayList<Media> series;
 
-    public Netflix(UserHandler userHandler, MovieHandler movieHandler, SeriesHandler seriesHandler) {
+    public Netflix(UserHandler userHandler, ArrayList<Media> movies, ArrayList<Media>series) {
         //Initialiserer attributterne, så netflix kan kommunikere med de andre klasser.
         this.userHandler = userHandler;
-        this.movieHandler = movieHandler;
-        this.seriesHandler = seriesHandler;
+        this.movies = movies;
+        this.series = series;
         this.scan = new Scanner(System.in); //Opretter en Scanner til at læse brugerinput.
+        this.movieHandler = new MovieHandler(movies,this);
+        this.seriesHandler = new SeriesHandler(series,this);
     }
 
     //Formål: Starter programmet og giver brugeren mulighed for at logge ind eller oprette en ny bruger.

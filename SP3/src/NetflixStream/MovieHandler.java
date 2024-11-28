@@ -16,9 +16,10 @@ public class MovieHandler {
     private Scanner scan; //Bruges til at læse input fra brugeren.
     private Netflix netflix;
 
-    public MovieHandler(ArrayList<Media> movies) {
+    public MovieHandler(ArrayList<Media> movies, Netflix netflix) {
         this.movies = movies; //Initialiserer listen over film (movies), så klassen ved, hvilke film den skal arbejde med.
         this.scan = new Scanner(System.in); //Opretter en Scanner til at håndtere brugerinput.
+        this.netflix = netflix;
     }
 
     //formål: Viser en liste over tilgængelige film.
