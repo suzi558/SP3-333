@@ -24,7 +24,7 @@ public class SeriesHandler {
             for (int i = 0; i < series.size(); i++) { //Itererer gennem listen over serier.
                 Media serie = series.get(i);
                 // Nummeret i listen starter fra 1 (i + 1)
-                System.out.println((i + 1) + ": " + serie.getTitel() + " - " + serie.getReleaseDate() + " - " + serie.getCategory() + " - " + serie.getRating());
+                System.out.println((i + 1) + serie.toString());
             }
         }
     }

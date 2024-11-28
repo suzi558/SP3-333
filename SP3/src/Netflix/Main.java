@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         // Initialiser UserHandler
-        UserHandler userHandler = new UserHandler("C:\\Users\\elmir\\OneDrive\\Dokumenter\\SP3-333\\SP3\\data\\UserLogin.csv");
+        UserHandler userHandler = new UserHandler("C:\\Users\\Daniel\\IdeaProjects\\SP3-333\\SP3\\data\\UserLogin.csv");
         userHandler.loadUsers();
 
         // Initialiser FileIO for at læse data

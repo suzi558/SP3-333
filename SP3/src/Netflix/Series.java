@@ -3,11 +3,13 @@ package Netflix;
 import java.util.ArrayList;
 
 public class Series extends Media {
-    private ArrayList<String> episodesPerSeason;
+    private ArrayList<Integer> seasonsList;
+    private ArrayList<Integer> episodeList;
 
-    Series(String titel, int releaseDate, ArrayList<String> categories, double rating, ArrayList<String> episodesPerSeason) {
+    Series(String titel, int releaseDate, ArrayList<String> categories, double rating, ArrayList<Integer> seasonsList, ArrayList<Integer> episodeList ) {
         super(titel, releaseDate, categories, rating);
-        this.episodesPerSeason = episodesPerSeason;
+        this.seasonsList = seasonsList;
+        this.episodeList = episodeList;
     }
 
     @Override
@@ -30,12 +32,21 @@ public class Series extends Media {
         return this.rating;
     }
 
-    public ArrayList<String> getEpisodesPerSeason() {
-        return episodesPerSeason;
+    public ArrayList<Integer> getSeasonsList() {
+        return seasonsList;
+    }
+
+    public ArrayList<Integer> getEpisodeList() {
+        return episodeList;
     }
 
     @Override
     public String toString() {
-        return titel + " - " + releaseDate + " - " + categories + " - " + rating + " - " + episodesPerSeason;
+
+        String seaeps = "";
+        for(int i = 0; i<seasonsList.size(); i++) {
+         seaeps += "|-|"+" S"+ seasonsList.get(i)+": "+episodeList.get(i)+" episodes ";
+        }
+        return ". " + titel + " - " + releaseDate + " - " + categories + " - " + "IMDB Rating: " + rating + " - " + seaeps;
     }
 }
