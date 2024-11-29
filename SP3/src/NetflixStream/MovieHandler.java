@@ -65,7 +65,7 @@ public class MovieHandler {
                 System.out.println("Enter the number of the movie you want to play:");
                 int movieChoice = scan.nextInt();
                 // Kald metoden til at spille serien
-                System.out.println("Playing series: " + movieChoice);
+                System.out.println("Playing movie: " + movieChoice);
                 break;
             case 2:
                 netflix.showMediaMenu(); // Gå tilbage til menuen
