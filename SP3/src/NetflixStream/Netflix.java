@@ -109,7 +109,7 @@ public class Netflix {
                 seriesHandler.showSeries();      // Viser serierne
                 seriesHandler.chooseSeries();    // Giver brugeren mulighed for at vælge og handle på en serie
             }
-            case "3" -> movieHandler.showSavedSeries(); //For gemte medier: Viser enten gemte film eller serier.
+            case "3" -> movieHandler.showSavedMovies(); //For gemte medier: Viser enten gemte film eller serier.
             case "4" -> seriesHandler.showSavedSeries(); //For andet input: Informerer om ugyldigt valg.
             default -> System.out.println("Invalid input. Please try again.");
         }

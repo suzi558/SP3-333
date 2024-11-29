@@ -35,18 +35,18 @@ public class MovieHandler {
         }
     }
 
-    //Formål: Viser en liste over gemte serier fra en fil.
-    public void showSavedSeries() {
-        System.out.println("Saved Series:");
+    //Formål: Viser en liste over gemte film fra en fil.
+    public void showSavedMovies() {
+        System.out.println("Saved movies:");
         //Læser filen SavedSeriesList.csv linje for linje og udskriver dens indhold.
-        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedSeriesList.csv"))) { //
+        try (BufferedReader reader = new BufferedReader(new FileReader("SP3/data/SavedMoviesList.csv"))) { //
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line); // Antager at hver linje er en gemt serie
             }
             showPlayOrBackMenu(); // Efter visning af gemte serier, vis muligheder (kalder på metoden)
         } catch (IOException e) { //Hvis der opstår en fejl ved læsning, vises en fejlbesked.
-            System.out.println("Error loading saved series: " + e.getMessage());
+            System.out.println("Error loading saved Movies: " + e.getMessage());
         }
     }
 
@@ -62,10 +62,10 @@ public class MovieHandler {
         switch (choice) {
             case 1:
                 //Spørger om serienummeret og udskriver en besked om, at serien spilles.
-                System.out.println("Enter the number of the series you want to play:");
-                int seriesChoice = scan.nextInt();
+                System.out.println("Enter the number of the movie you want to play:");
+                int movieChoice = scan.nextInt();
                 // Kald metoden til at spille serien
-                System.out.println("Playing series: " + seriesChoice);
+                System.out.println("Playing series: " + movieChoice);
                 break;
             case 2:
                 netflix.showMediaMenu(); // Gå tilbage til menuen
